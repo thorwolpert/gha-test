@@ -1,7 +1,9 @@
 name: Node CI
 
 on:
-  push
+  push:
+    branches:
+      - master
   pull_request:
     types: [assigned]
 
