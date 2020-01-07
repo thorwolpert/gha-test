@@ -15,7 +15,7 @@ jobs:
         node-version: [12.x]
 
     steps:
-    - uses: actions/checkout@v1
+    - uses: actions/checkout@v2
     - name: Use Node.js ${{ matrix.node-version }}
       uses: actions/setup-node@v1
       with:
@@ -36,7 +36,7 @@ jobs:
       env:
         CI: true
     - name: Log into registry
-      run: echo "${{ secrets.sa }}" | docker login docker.pkg.github.com -u ${{ github.sa_name }} --password-stdin
+      run: echo "${{ secrets.sa }}" | docker login docker.pkg.github.com -u tldtja --password-stdin
     - name: Build image
       run: docker build . --file Dockerfile --tag maintain
     - name: Push image
