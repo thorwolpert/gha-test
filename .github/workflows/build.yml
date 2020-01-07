@@ -35,8 +35,16 @@ jobs:
         npm run test:unit
       env:
         CI: true
-    - name: build
+    - name: Log into registry
+      run: echo "${{ secrets.sa }}" | docker login docker.pkg.github.com -u ${{ github.sa_name }} --password-stdin
+    - name: Build image
+      run: docker build . --file Dockerfile --tag maintain
+    - name: Push image
       run: |
-        npm run build
-      env:
-        CI: true
+          IMAGE_ID=bcrentities-docker-local.artifacts.developer.gov.bc.ca/maintain
+          VERSION=latest
+          echo IMAGE_ID=$IMAGE_ID
+          echo VERSION=$VERSION
+          docker tag image $IMAGE_ID:$VERSION
+          docker push $IMAGE_ID:$VERSION
+
