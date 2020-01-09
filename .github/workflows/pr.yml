@@ -2,7 +2,7 @@ name: PR CI
 
 on:
   pull_request:
-    types: [assigned]
+    types: [assigned, synchronize]
 
 jobs:
   build:
